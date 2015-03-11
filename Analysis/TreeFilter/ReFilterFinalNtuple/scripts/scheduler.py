@@ -16,6 +16,7 @@ base = '/afs/cern.ch/work/c/cranelli/public/WGamGam/Output'
 
 
 jobs_data = [
+
     # (base, 'job_muon_2012a_Jan22rereco'),
     # (base, 'job_muon_2012b_Jan22rereco'),
     # (base, 'job_muon_2012c_Jan22rereco'),
@@ -97,6 +98,7 @@ input = 'LepGammaGammaNoPhID_2014_12_23'
 #input = 'LepGammaGammaFullPhIDElPhScaleUp_2014_11_20'
 #output = 'LepGammaGammaTrigEleOlapUnblindLowPt_2015_01_02'
 #output = 'LepGammaGammaNomUnblindAll_2015_01_26'
+
 output = 'LepGammaGammaFinalEl_2015_03_03'
 #output = 'LepGammaGammaFullPhIDElPhScaleUpFinal_2014_11_20'
 
