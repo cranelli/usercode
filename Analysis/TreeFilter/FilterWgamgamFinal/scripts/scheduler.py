@@ -12,20 +12,21 @@ if not options.run and not options.check :
     options.run = True
 
 #base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2014_12_05'
+
 #base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2015_02_02'
 base = r'/afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput'
 #base = r'/afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutputWithoutTrig'
 #base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutputDiMuon_2014_11_27'
 #base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2014_10_30'
 jobs_data = [
-        #(base, 'job_electron_2012a_Jan22rereco'),
-        #(base, 'job_electron_2012b_Jan22rereco'),
-        #(base, 'job_electron_2012c_Jan2012rereco'),
-        #(base, 'job_electron_2012d_Jan22rereco'),
-        #(base, 'job_muon_2012a_Jan22rereco'),
-        #(base, 'job_muon_2012b_Jan22rereco'),
-        #(base, 'job_muon_2012c_Jan22rereco'),
-        #(base, 'job_muon_2012d_Jan22rereco'),
+        (base, 'job_electron_2012a_Jan22rereco'),
+        (base, 'job_electron_2012b_Jan22rereco'),
+        (base, 'job_electron_2012c_Jan2012rereco'),
+        (base, 'job_electron_2012d_Jan22rereco'),
+        (base, 'job_muon_2012a_Jan22rereco'),
+        (base, 'job_muon_2012b_Jan22rereco'),
+        (base, 'job_muon_2012c_Jan22rereco'),
+        (base, 'job_muon_2012d_Jan22rereco'),
 
         #(base, 'job_2muon_2012a_Jan22rereco'),
         #(base, 'job_2muon_2012b_Jan22rereco'),
@@ -118,6 +119,7 @@ jobs_mc = [
         #(base, 'QCD_Pt-40_doubleEMEnriched')
 
         #(base, 'job_summer12_ttinclusive'),
+
 ]
 
 #module_mc   = 'ConfLepGammaFilter.py'
@@ -141,10 +143,12 @@ top_configs = [
         },
     #{ 
                 #  'module'      : 'ConfObjFilter.py',
+
                 #  'args_mc'     : '{ \'cut_nLep\' : \' > 1 \', \'cut_nLepTrigMatch\' : \' > 0 \' }',
                 #  'args_data'   : '{ \'cut_nLep\' : \' > 1 \', \'cut_nLepTrigMatch\' : \' > 0 \' }',
                 #  'output_name' : 'DiLepton_2014_09_22',
                 #  'tag'         : 'llData',
+
                 #},
 ]
 
@@ -159,6 +163,7 @@ else :
     #--------------
     # for batch
     #--------------
+
     command_base = 'python scripts/filter.py  --filesDir %(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/FilterWgamgamFinal/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob %(nFilesPerJob)d --batch --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s '
 #command_base = 'python scripts/filter.py  --filesDir root://eoscms/%(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob %(nFilesPerJob)d --batch --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s '
 
@@ -170,7 +175,7 @@ check_commands_base = 'python ../../Util/scripts/check_dataset_completion.py --o
 
 #command_base = 'python scripts/filter.py  --filesDir %(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/%(output)s/%(job)s --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob 5 --nproc %(nproc)d --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s'
 
-nFilesPerJob = 1
+nFilesPerJob = 5
 nproc=5
 treename='ggNtuplizer/EventTree'
 

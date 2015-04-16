@@ -16,48 +16,102 @@ def get_keep_filter() :
         If both filters are used, all branches in keep_filter are used
         except for those in remove_filter """
 
-    return ['el_n', 'mu_n', 'ph_n', 'jet_n', 'el_pt', 'el_eta', 'el_phi', 'el_e', 'mu_pt', 'mu_eta', 'mu_phi', 'mu_e', 'ph_pt', 'ph_eta', 'ph_phi', 'ph_e','pfMET.*', 'recoPfMET.*', 'pfType01MET.*','nPU', 'puTrue', 'nVtx', 'nVtxBS', 'PUWeight.*']
+    return ['el_n', 'mu_n', 'ph_n', 'el_pt.*', 'el_eta.*', 'el_phi.*', 'el_e.*', 'mu_pt.*', 'mu_eta.*', 'mu_ph.*i', 'mu_e.*', 'el_pfiso40', 'el_triggerMatch', 'el_passMvaTrig', 'el_passMvaNonTrig', 'mu_corrIso', 'mu_passTightNoIso', 'mu_passTight', 'pfMET']
 
 def config_analysis( alg_list, args ) :
     """ Configure analysis modules. Order is preserved """
 
+    #----------------------------------------
+    # Get the isData flag from the args
+    # so it isnt used in the args below
+    #----------------------------------------
+    isData = args.pop('isData', 'False')
+
+    #----------------------------------------
     # lepton and photon filters must be run 
     # before the jet filter
-    alg_list.append( get_muon_filter( ptcut=10 ) )
+    # to properly handle the overlap removal
+    #----------------------------------------
+
+    
+    #----------------------------------------
+    # Nominal muon filter
+    #----------------------------------------
+    alg_list.append( get_muon_filter( id='Tight',  ptcut=10 ) )
+
+    #----------------------------------------
+    # Loose muon filter
+    #----------------------------------------
+    #print '****************LOOSE MUON ID*************************'
+    #alg_list.append( get_muon_filter( id='TightNoIsoNoD0',  ptcut=10 ) )
+
+    #----------------------------------------
+    # Nominal electron filter
+    #----------------------------------------
+    #print '************************************NO ELE ID**********************'
+    #alg_list.append( get_electron_filter( None, ptcut=10 ) )
     alg_list.append( get_electron_filter( 'mvaNonTrig', ptcut=10 ) )
+    print 'SAVING MVA ELECTRONS'
+
+    #----------------------------------------
+    # Other electron filters
+    #----------------------------------------
     #alg_list.append( get_electron_filter( 'tightTrig' ) )
     #alg_list.append( get_electron_filter( None ) )
+
+    #----------------------------------------
+    # Nominal photon filter with no photon ID
+    #----------------------------------------
+    alg_list.append( get_photon_filter( id=None, eVeto=None, ptcut=15, sort_by_id=True, doElOlapRm=True, doTrigElOlapRm=True ) )
+    print 'SAVING NOID PHOTONS, WITH ELE OLAP REMOVAL'
+
+    #----------------------------------------
+    # Other photon filters
+    #----------------------------------------
     #alg_list.append( get_photon_filter( 'looseNoSIEIE', ptcut=15 ) )
     #alg_list.append( get_photon_filter( id='medium', eVeto=None, ptcut=15, sort_by_id=True ) )
     #alg_list.append( get_photon_filter( id=None, eVeto='hasPixSeed', ptcut=15 ) )
     #alg_list.append( get_photon_filter( id='medium', eVeto='hasPixSeed', ptcut=15, sort_by_id=True) )
     #alg_list.append( get_photon_filter( id=None, eVeto=None, ptcut=15, sort_by_id=True, doElOlapRm=True ) )
-    alg_list.append( get_photon_filter( id=None, eVeto=None, ptcut=15, sort_by_id=True, doElOlapRm=False, doTrigElOlapRm=True ) )
-    alg_list.append( get_jet_filter(do_hists=False) )
-    #print 'SAVING Medium PHOTONS, WITH ELE OLAP'
-    print 'SAVING NOID PHOTONS, WITH ELE OLAP'
-    print 'SAVING MVA ELECTRONS'
 
-    
+    #----------------------------------------
+    # Nominal jet filter
+    #----------------------------------------
+    alg_list.append( get_jet_filter(do_hists=False) )
+
+    #----------------------------------------
+    # Calculate event level variables
+    #----------------------------------------
     alg_list.append( Filter( 'CalcEventVars' ) )
+
+    #----------------------------------------
+    # Calculate truth level variables
+    #----------------------------------------
     alg_list.append( Filter( 'BuildTruth' ) )
 
-    isData = args.pop('isData', 'False')
-
+    #----------------------------------------
+    # Set event level cuts that are passed
+    # from the scheduler
+    #----------------------------------------
     filter_event = Filter('FilterEvent')
     for cut, val in args.iteritems() :
         setattr(filter_event, cut, val)
 
     alg_list.append( filter_event )
 
-    filter_blind = Filter( 'FilterBlind' )
-    filter_blind.cut_ph_pt_lead = ' < 40 '
-    #filter_blind.cut_nPhPassMedium = ' < 2 '
-    #filter_blind.cut_m_lepphph= ' > 86.2 & < 96.2  '
-    #filter_blind.cut_m_lepph1= ' > 86.2 & < 96.2  '
-    #filter_blind.cut_m_lepph2= ' > 86.2 & < 96.2  '
-    filter_blind.add_var( 'isData', isData )
-    #alg_list.append(filter_blind)
+    ##----------------------------------------
+    ## Apply blinding
+    ## DISABLED
+    ##----------------------------------------
+    ## Apply blinding
+    #filter_blind = Filter( 'FilterBlind' )
+    #filter_blind.cut_ph_pt_lead = ' < 40 '
+    ##filter_blind.cut_nPhPassMedium = ' < 2 '
+    ##filter_blind.cut_m_lepphph= ' > 86.2 & < 96.2  '
+    ##filter_blind.cut_m_lepph1= ' > 86.2 & < 96.2  '
+    ##filter_blind.cut_m_lepph2= ' > 86.2 & < 96.2  '
+    #filter_blind.add_var( 'isData', isData )
+    ##alg_list.append(filter_blind)
 
 
 
@@ -99,7 +153,8 @@ def get_electron_filter ( id, ptcut=10 ) :
     #--------------------------------
     filt.cut_mu_el_dr = ' > 0.4 '
 
-    setattr( filt, 'cut_el_%s' %id, 'True' )
+    if id is not None :
+        setattr( filt, 'cut_el_%s' %id, ' == True' )
 
     return filt
 
@@ -132,16 +187,16 @@ def get_photon_filter ( id=None, eVeto=None, ptcut=10, sort_by_id='false', doElO
     #filt.add_var( 'PtScaleUpEndcap', '1.014' )
 
     if id is not None :
-        setattr( filt, 'cut_ph_%s' %id, 'True' )
+        setattr( filt, 'cut_ph_%s' %id, ' == True' )
     if eVeto is not None :
-        setattr( filt, 'cut_ph_%s' %eVeto, ' False ' )
+        setattr( filt, 'cut_ph_%s' %eVeto, ' == False ' )
 
     filt.sort_by_id = sort_by_id
 
     return filt
 
 
-def get_muon_filter( ptcut=10 ) :
+def get_muon_filter( id='Tight', ptcut=10 ) :
 
     filt = Filter( 'FilterMuon' )
 
@@ -150,7 +205,8 @@ def get_muon_filter( ptcut=10 ) :
     #filt.add_var( 'PtScaleUpBarrel', '1.06' )
     #filt.add_var( 'PtScaleUpEndcap', '1.015' )
 
-    filt.cut_mu_passTight = ' == True '
+    if id is not None :
+        setattr(filt,  'cut_mu_pass%s' %id, ' == True' )
     filt.cut_mu_pt = ' > %d' %ptcut
     filt.cut_mu_eta = ' < 2.1 '
     #filt.cut_mu_corriso = ' < 0.2  '

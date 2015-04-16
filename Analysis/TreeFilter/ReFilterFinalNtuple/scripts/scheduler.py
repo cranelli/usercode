@@ -27,6 +27,7 @@ jobs_data = [
     # (base, 'job_electron_2012d_Jan22rereco'),
 ]
 jobs_mc = [
+
     (base, 'job_summer12_Wgg_FSR'),
     (base, 'job_summer12_WAA_ISR'),
     (base, 'job_LNuAA_LM0123_Reweight'),
@@ -85,16 +86,17 @@ if options.local :
     #--------------------
     # not batch
     #--------------------
-    command_base = 'python scripts/filter.py  --filesDir %(base)s/%(input)s/%(job)s --outputDir %(base)s/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --fileKey tree.root --module scripts/%(module)s --confFileName %(job)s.txt --nFilesPerJob %(nFilesPerJob)d --nproc %(nproc)d --exeName %(exename)s  '
+    command_base = 'python scripts/filter.py  --filesDir %(base)s/%(input)s/%(job)s --outputDir %(base)s/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --fileKey tree.root --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --confFileName %(job)s.txt --nFilesPerJob %(nFilesPerJob)d --nproc %(nproc)d --exeName %(exename)s  '
     
 else :
     #--------------------
     # for batch submission
     #--------------------
-    command_base = 'python scripts/filter.py  --filesDir %(base)s/%(input)s/%(job)s --outputDir %(base)s/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --fileKey tree.root --module scripts/%(module)s --batch --confFileName %(job)s.txt --nFilesPerJob %(nFilesPerJob)d --exeName %(exename)s_%(job)s '
+    command_base = 'python scripts/filter.py  --filesDir %(base)s/%(input)s/%(job)s --outputDir %(base)s/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --fileKey tree.root --module scripts/%(module)s --moduleArgs "%(moduleArgs)s"  --batch --confFileName %(job)s.txt --nFilesPerJob %(nFilesPerJob)d --exeName %(exename)s_%(job)s '
 
 if options.resubmit :
     command_base += ' --resubmit '
+
 
 input = 'FilterWgamgamFinal/LepGammaGammaNoPhID_2015_3_31'
 #input = 'LepGammaGammaFullPhIDElPhScaleUp_2014_11_20'
@@ -102,42 +104,107 @@ input = 'FilterWgamgamFinal/LepGammaGammaNoPhID_2015_3_31'
 #output = 'LepGammaGammaNomUnblindAll_2015_01_26'
 
 output = 'ReFilterFinalNtuple/LepGammaGammaFinalMu_2015_03_31'
+
 #output = 'LepGammaGammaFullPhIDElPhScaleUpFinal_2014_11_20'
 
+top_configs = [
+    {   
+     'module'      : 'ConfFilter.py', 
+     'args'        : {'function' : 'make_final_el', 'blind_pt' : 'None'},
+     'input_name'  : 'LepGammaGammaNoPhID_2015_04_11',
+     'output_name' : 'LepGammaGammaFinalElUnblindAll_2015_04_15',
+     'tag'         : 'elFinal'
+    },
+    {   
+     'module'      : 'ConfFilter.py', 
+     'args'        : {'function' : 'make_final_mu', 'blind_pt' : 'None'},
+     'input_name'  : 'LepGammaGammaNoPhID_2015_04_11',
+     'output_name' : 'LepGammaGammaFinalMuUnblindAll_2015_04_15',
+     'tag'         : 'muFinal'
+    },
+    #{   
+    # 'module'      : 'ConfFilter.py', 
+    # 'args'        : {'function' : 'make_nominal_unblind_noEleVeto', 'blind_pt' : 'None'},
+    # 'input_name'  : 'LepGammaGammaNoPhID_2015_04_11',
+    # 'output_name' : 'LepGammaGammaNomUnblindAllNoEleVeto_2015_04_12',
+    # 'tag'         : 'nomUnblind'
+    #},
+    #{   
+    # 'module'      : 'ConfFilter.py', 
+    # 'args'        : {'function' : 'make_looseID_bothEleVeto', 'blind_pt' : 'None'},
+    # 'input_name'  : 'LepGammaGammaNoPhID_2015_04_11',
+    # 'output_name' : 'LepGammaGammaNoPhIDVetoPixSeedBoth_2015_04_12',
+    # 'tag'         : 'vetoBoth'
+    #},
+    #{   
+    # 'module'      : 'ConfFilter.py', 
+    # 'args'        : {'function' : 'make_looseID_invEleVetoLead', 'blind_pt' : 'None'},
+    # 'input_name'  : 'LepGammaGammaNoPhID_2015_04_11',
+    # 'output_name' : 'LepGammaGammaNoPhIDInvPixSeedLead_2015_04_12',
+    # 'tag'         : 'invLead'
+    #},
+    #{   
+    # 'module'      : 'ConfFilter.py', 
+    # 'args'        : {'function' : 'make_looseID_invEleVetoSubl', 'blind_pt' : 'None'},
+    # 'input_name'  : 'LepGammaGammaNoPhID_2015_04_11',
+    # 'output_name' : 'LepGammaGammaNoPhIDInvPixSeedSubl_2015_04_12',
+    # 'tag'         : 'invSubl'
+    #},
+]
+
+
 module = 'ConfFilter.py'
-nFilesPerJob = 5
+nFilesPerJob = 1
 nProc = 6
 exename='RunAnalysis'
 treename='ggNtuplizer/EventTree'
 
 if options.run :
-    first = True
-    for base, job in jobs_data :
-        if options.local :
-            job_exename = exename+'Data'
-        else :
-            job_exename = exename
-        command = command_base %{ 'base' : base, 'job' : job, 'nFilesPerJob' : nFilesPerJob, 'input' : input, 'output' : output, 'nproc' : nProc, 'exename' : job_exename, 'treename' : treename, 'module' : module }
-        if not first :
-            command += ' --noCompile '
-        command += ' --moduleArgs "{ \'isData\' : \'True\' }"  '
-        print command
-        os.system(command)
-        if first :
-            first = False
+    for config in top_configs :
+        first = True
 
-    first = True
-    for base, job in jobs_mc :
-        if options.local :
-            job_exename = exename+'MC'
-        else :
-            job_exename = exename
-        command = command_base %{ 'base' : base, 'job' : job, 'nFilesPerJob' : nFilesPerJob, 'input' : input, 'output' : output, 'nproc' : nProc, 'exename' : job_exename, 'treename' : treename, 'module' : module }
-        if not first :
-            command += ' --noCompile '
-        print command
-        os.system(command)
-        if first :
-            first = False
+        for base, job in jobs_data :
+            job_exename = '%s_%s_Data' %(exename, config['tag'] )
+
+            module_arg = config['args']
+            module_arg['isData'] = ' == True '
+
+            module_str = '{ '
+            for key, val in module_arg.iteritems() :
+                module_str += '\'%s\' : \'%s\',' %( key, val)
+
+            module_str += '}'
+            
+
+            command = command_base %{ 'base' : base, 'job' : job, 'nFilesPerJob' : nFilesPerJob, 'input' : config['input_name'], 'output' : config['output_name'], 'nproc' : nProc, 'exename' : job_exename, 'treename' : treename, 'module' : config['module'], 'moduleArgs' : module_str }
+
+            if not first :
+                command += ' --noCompile '
+
+            print command
+            os.system(command)
+            if first :
+                first = False
+
+        first = True
+        for base, job in jobs_mc :
+            job_exename = '%s_%s_MC' %(exename, config['tag'] )
+
+            module_arg = config['args']
+
+            module_str = '{ '
+            for key, val in module_arg.iteritems() :
+                module_str += '\'%s\' : \'%s\',' %( key, val)
+
+            module_str += '}'
+
+            command = command_base %{ 'base' : base, 'job' : job, 'nFilesPerJob' : nFilesPerJob, 'input' : config['input_name'], 'output' : config['output_name'], 'nproc' : nProc, 'exename' : job_exename, 'treename' : treename, 'module' : config['module'], 'moduleArgs' : module_str }
+            if not first :
+                command += ' --noCompile '
+
+            print command
+            os.system(command)
+            if first :
+                first = False
 
 
