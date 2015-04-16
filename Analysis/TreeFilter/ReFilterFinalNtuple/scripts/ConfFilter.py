@@ -27,9 +27,9 @@ def config_analysis( alg_list, args ) :
 
     #make_nominal_unbzrej( alg_list, args )
 
-    #make_final_mu( alg_list, args, blind_pt = 40 )
+    make_final_mu( alg_list, args, blind_pt = 40 )
 
-    make_final_el( alg_list, args, blind_pt = 40 )
+    #make_final_el( alg_list, args, blind_pt = 40 )
 
     #make_looseID_noEleVeto( alg_list, args )
     #

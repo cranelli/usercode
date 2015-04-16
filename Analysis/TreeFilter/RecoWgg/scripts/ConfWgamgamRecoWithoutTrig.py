@@ -23,13 +23,13 @@ def config_analysis( alg_list, args ) :
     # just for pileup reweighting
     alg_list.append( weight_event(args) )
 
-    alg_list.append( Filter( 'BuildTriggerBits' ) )
+    #alg_list.append( Filter( 'BuildTriggerBits' ) )
 
-    trig_filt = Filter('FilterTrigger')
+    #trig_filt = Filter('FilterTrigger')
     ##trig_filt.cut_trigger = ' ==48 ' #HLT_Photon36_CaloId10_Iso50_Photon22_CaloId10_Iso50_v 
-    trig_filt.cut_trigger = '==17 | == 18 | == 19' # HLT_Ele27_WP80 || HLT_IsoMu24_eta2p1 || HLT_IsoMu24
+    #trig_filt.cut_trigger = '==17 | == 18 | == 19' # HLT_Ele27_WP80 || HLT_IsoMu24_eta2p1 || HLT_IsoMu24
     #trig_filt.cut_trigger = '==13 | == 14 ' # HLT_mu17_mu8 || HLT_mu17_TkMu8
-    alg_list.append(trig_filt)
+    #alg_list.append(trig_filt)
 
 def build_muon( do_cutflow=False, do_hists=False, evalPID=None, applyCorrections=False ) :
 

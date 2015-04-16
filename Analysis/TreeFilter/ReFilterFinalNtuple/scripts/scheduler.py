@@ -12,7 +12,7 @@ options = p.parse_args()
 if not options.run and not options.check :
     options.run = True
 
-base = '/afs/cern.ch/work/c/cranelli/public/WGamGam/Output'
+base = '/afs/cern.ch/work/c/cranelli/public/WGamGam/'
 
 
 jobs_data = [
@@ -29,6 +29,8 @@ jobs_data = [
 jobs_mc = [
     (base, 'job_summer12_Wgg_FSR'),
     (base, 'job_summer12_WAA_ISR'),
+    (base, 'job_LNuAA_LM0123_Reweight'),
+    (base, 'job_LNuAA_LT012_Reweight'),
     #(base, 'job_summer12_DYJetsToLL'),
     #(base, 'job_summer12_Wg'),
     #(base, 'job_summer12_Zg'),
@@ -94,12 +96,12 @@ else :
 if options.resubmit :
     command_base += ' --resubmit '
 
-input = 'LepGammaGammaNoPhID_2014_12_23'
+input = 'FilterWgamgamFinal/LepGammaGammaNoPhID_2015_3_31'
 #input = 'LepGammaGammaFullPhIDElPhScaleUp_2014_11_20'
 #output = 'LepGammaGammaTrigEleOlapUnblindLowPt_2015_01_02'
 #output = 'LepGammaGammaNomUnblindAll_2015_01_26'
 
-output = 'LepGammaGammaFinalEl_2015_03_03'
+output = 'ReFilterFinalNtuple/LepGammaGammaFinalMu_2015_03_31'
 #output = 'LepGammaGammaFullPhIDElPhScaleUpFinal_2014_11_20'
 
 module = 'ConfFilter.py'

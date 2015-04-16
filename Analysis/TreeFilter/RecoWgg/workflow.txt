@@ -1,0 +1,25 @@
+python scripts/scheduler_nofilt.py
+
+
+
+#Command to run over my aQGC ggNtuple
+
+python scripts/filter.py  --files /afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LT012/LNuAA_LT012_Reweight_ggNtuple.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/job_LNuAA_LT012_Reweight --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamReco.py --enableKeepFilter --confFileName job_summer12_DYJetsToLL.txt --nsplit 1 --exeName RunAnalysisMC_job_LNuAA_LT012_Reweight --moduleArgs "{ 'sampleFile' : '/afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LT012/LNuAA_LT012_Reweight_ggNtuple.root'}"
+
+python scripts/filter.py  --files /afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LM0123/LNuAA_LM0123_Reweight_ggNtuple.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/job_LNuAA_LM0123_Reweight --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamReco.py --enableKeepFilter --confFileName job_summer12_DYJetsToLL.txt --nsplit 1 --exeName RunAnalysisMC_job_LNuAA_LM0123_Reweight --moduleArgs "{ 'sampleFile' : '/afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LM0123/LNuAA_LM0123_Reweight_ggNtuple.root'}"
+
+#Command to run over SM ggNtuple (Stored on cmkuo EOS space.)
+
+python scripts/filter.py  --files root://eoscms//eos/cms/store/group/phys_egamma/cmkuo/job_summer12_WAA_ISR.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/job_summer12_WAA_ISR --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamReco.py --enableKeepFilter --batch --confFileName job_summer12_WAA_ISR.txt --nsplit 20 --exeName RunAnalysisMC_job_summer12_WAA_ISR --moduleArgs "{ 'sampleFile' : 'root://eoscms//eos/cms/store/group/phys_egamma/cmkuo/job_summer12_WAA_ISR.root'}"
+
+python scripts/filter.py  --files root://eoscms//eos/cms/store/group/phys_egamma/cmkuo/job_summer12_Wgg_FSR.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/job_summer12_Wgg_FSR --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamReco.py --enableKeepFilter --batch --confFileName job_summer12_Wgg_FSR.txt --nsplit 20 --exeName RunAnalysisMC_job_summer12_Wgg_FSR --moduleArgs "{ 'sampleFile' : 'root://eoscms//eos/cms/store/group/phys_egamma/cmkuo/job_summer12_Wgg_FSR.root'}"
+
+#Common Fiducial Skims  (Does not work because of switch between vectors and arrays)
+
+python scripts/filter.py  --files /afs/cern.ch/work/c/cranelli/public/WGamGam/Acceptances/CommonFiducial_Skim/ggNtuples_Skim/job_summer12_WAA_ISR/ggtree_mc_ISR_CommonFiducialSkim.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/CommonFiducial_Skim_WAA_ISR --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamReco.py --enableKeepFilter --confFileName job_summer12_WAA_ISR.txt --nsplit 1 --exeName RunAnalysisMC_CommonFiducial_Skim_Wgg_FSR --moduleArgs "{ 'sampleFile' : '/afs/cern.ch/work/c/cranelli/public/WGamGam/Acceptances/CommonFiducial_Skim/ggNtuples_Skim/job_summer12_WAA_ISR/ggtree_mc_ISR_CommonFiducialSkim.root'}"
+
+#Command to run over SM ggNtuple and produce reconstructed events without Trigger Cuts (running locally)
+
+python scripts/filter.py  --files root://eoscms//eos/cms/store/group/phys_egamma/cmkuo/job_summer12_WAA_ISR.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutputWithoutTrig/job_summer12_WAA_ISR --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamRecoWithoutTrig.py --enableKeepFilter --batch --confFileName job_summer12_WAA_ISR.txt --nsplit 40 --exeName RunAnalysisMC_job_summer12_WAA_ISR --moduleArgs "{ 'sampleFile' : 'root://eoscms//eos/cms/store/group/phys_egamma/cmkuo/job_summer12_WAA_ISR.root'}"
+
+python scripts/filter.py  --files root://eoscms//eos/cms/store/group/phys_egamma/cmkuo/job_summer12_Wgg_FSR.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutputWithoutTrig/job_summer12_Wgg_FSR --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamRecoWithoutTrig.py --enableKeepFilter --batch --confFileName job_summer12_Wgg_FSR.txt --nsplit 40 --exeName RunAnalysisMC_job_summer12_Wgg_FSR --moduleArgs "{ 'sampleFile' : 'root://eoscms//eos/cms/store/group/phys_egamma/cmkuo/job_summer12_Wgg_FSR.root'}"

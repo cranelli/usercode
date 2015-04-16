@@ -12,7 +12,9 @@ if not options.run and not options.check :
     options.run = True
 
 #base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2014_12_05'
-base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2015_02_02'
+#base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2015_02_02'
+base = r'/afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput'
+#base = r'/afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutputWithoutTrig'
 #base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutputDiMuon_2014_11_27'
 #base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2014_10_30'
 jobs_data = [
@@ -63,7 +65,11 @@ jobs_data = [
 ]
 
 jobs_mc = [
-        (base, 'job_summer12_DYJetsToLL'),
+    #(base, 'job_LNuAA_LM0123_Reweight'),
+    #(base, 'job_LNuAA_LT012_Reweight'),
+    (base, 'job_summer12_WAA_ISR'),
+    (base, 'job_summer12_Wgg_FSR'),
+        #(base, 'job_summer12_DYJetsToLL'),
         #(base, 'job_summer12_Zg'),
         #(base, 'job_summer12_Zgg'),
         #(base, 'job_summer12_WAA_ISR'),
@@ -119,118 +125,26 @@ jobs_mc = [
 #output_name = 'LepGamma_2013_11_04'
 
 top_configs = [ 
-                #{ 
+        #{
+        #'module'      : 'ConfNoElId.py',
+        #'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\' }',
+        #'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\' }',
+        #'output_name' : 'LepGammaGammaNoPhIDNoElID_2015_3_31',
+        #'tag'         : 'lgg',
+       # },
+    { 
+        'module'      : 'ConfObjFilter.py',
+        'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\' }',
+        'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\' }',
+        'output_name' : 'LepGammaGammaNoPhID_2015_3_31',
+        'tag'         : 'lgg',
+        },
+    #{ 
                 #  'module'      : 'ConfObjFilter.py',
                 #  'args_mc'     : '{ \'cut_nLep\' : \' > 1 \', \'cut_nLepTrigMatch\' : \' > 0 \' }',
                 #  'args_data'   : '{ \'cut_nLep\' : \' > 1 \', \'cut_nLepTrigMatch\' : \' > 0 \' }',
                 #  'output_name' : 'DiLepton_2014_09_22',
                 #  'tag'         : 'llData',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLep\' : \' > 0 \' }',
-                #  'args_data'   : '{ \'cut_nLep\' : \' > 0 \' }',
-                #  'output_name' : 'SingleLepton_2014_09_03',
-                #  'tag'         : 'llData',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\' }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\' }',
-                #  'output_name' : 'LepGammaGammaFullPhIDElPhScaleUp_2014_11_20',
-                #  'tag'         : 'lgg',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 0\' }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 0\', \'isData\' : \'True\' }',
-                #  'output_name' : 'LepGammaNoPhIDNoEleOlap_2014_12_29',
-                #  'tag'         : 'lg',
-                #},
-                { 
-                  'module'      : 'ConfObjFilter.py',
-                  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\' }',
-                  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'isData\' : \'True\' }',
-                  'output_name' : 'LepLep_2015_02_02',
-                  'tag'         : 'llg',
-                },
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_nPh\' : \'> 0\' }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_nPh\' : \'> 0\', \'isData\' : \'True\' }',
-                #  'output_name' : 'LepLepGammaNoPhID_2014_12_23',
-                #  'tag'         : 'llg',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\' }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\' }',
-                #  'output_name' : 'LepGammaGammaNoPhIDTrigEleOlap_2015_01_02',
-                #  'tag'         : 'llg',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLep10\' : \'> 1\',\'cut_nLep20\' : \'> 0\', \'cut_nPh\' : \'> 1\' }',
-                #  'args_data'   : '{ \'cut_nLep10\' : \'> 1\',\'cut_nLep20\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\' }',
-                #  'output_name' : 'LepLepGammaGammaNoPhIDDiMuonTrig_2014_11_28',
-                #  'tag'         : 'llg',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_nPhPassMediumNoEleVeto\' : \'> 0\' }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_nPhPassMediumNoEleVeto\' : \'> 0\', \'isData\' : \'True\' }',
-                #  'output_name' : 'LepGammaMediumPhID_2014_11_03',
-                #  'tag'         : 'lg',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_nPh\' : \'> 0\' }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_nPh\' : \'> 0\', \'isData\' : \'True\' }',
-                #  'output_name' : 'LepGammaMediumPhID_2014_11_03',
-                #  'tag'         : 'lg',
-                #},
-                #{
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLep\' : \'> 0\', \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 0\'}',
-                #  'args_data'   : '{ \'cut_nLep\' : \'> 0\', \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'== 1\' }',
-                #  'output_name' : 'LepGamma_2014_04_29',
-                #  'tag'         : 'lg',
-                #},
-                #{
-    
-                #  'module'      : 'ConfObjFilter.py',
-                #  'args_mc'     : '{ \'cut_nLep\' : \' > 0 \' }',
-                #  'args_data'   : '{ \'cut_nLep\' : \' > 0 \' }',
-                #  'output_name' : 'SingleLepton_2014_09_03',
-                #  'tag'         : 'llData',
-                #},
-                #{
-                #  'module'      : 'ConfObjFilter.py',
-                #    'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'cut_hasPixSeed_leadph12\' : \'False\', \'cut_hasPixSeed_sublph12\' : \'False\'  }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\', \'cut_hasPixSeed_leadph12\' : \'False\', \'cut_hasPixSeed_sublph12\' : \'False\' }',
-                #  'output_name' : 'LepGammaGammaNoPhIDVetoPixSeedBothNoLepIso_2014_10_16',
-                # 'tag'         : 'lgg',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #    'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'cut_hasPixSeed_leadph12\' : \'False\', \'cut_hasPixSeed_sublph12\' : \'False\'  }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\', \'cut_hasPixSeed_leadph12\' : \'False\', \'cut_hasPixSeed_sublph12\' : \'False\' }',
-                #  'output_name' : 'LepGammaGammaNoPhIDVetoPixSeedBoth_2014_10_22_v2',
-                # 'tag'         : 'lgg',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #    'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'cut_hasPixSeed_leadph12\' : \'True\', \'cut_hasPixSeed_sublph12\' : \'False\'  }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\', \'cut_hasPixSeed_leadph12\' : \'True\', \'cut_hasPixSeed_sublph12\' : \'False\' }',
-                #  'output_name' : 'LepGammaGammaNoPhIDInvPixVetoLead_2014_10_15',
-                # 'tag'         : 'lgginvl',
-                #},
-                #{ 
-                #  'module'      : 'ConfObjFilter.py',
-                #    'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'cut_hasPixSeed_leadph12\' : \'False\', \'cut_hasPixSeed_sublph12\' : \'True\'  }',
-                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 0\', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\', \'cut_hasPixSeed_leadph12\' : \'False\', \'cut_hasPixSeed_sublph12\' : \'True\' }',
-                #  'output_name' : 'LepGammaGammaNoPhIDInvPixVetoSubl_2014_10_15',
-                # 'tag'         : 'lgginvs',
                 #},
 ]
 
@@ -239,18 +153,20 @@ if options.local :
     #--------------
     # not batch
     #--------------
-    command_base = 'python scripts/filter.py  --filesDir root://eoscms/%(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob %(nFilesPerJob)d --nproc %(nproc)d --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s '
+    command_base = 'python scripts/filter.py  --filesDir %(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/FilterWgamgamFinal/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob %(nFilesPerJob)d --nproc %(nproc)d --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s '
+#command_base = 'python scripts/filter.py  --filesDir root://eoscms/%(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob %(nFilesPerJob)d --nproc %(nproc)d --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s '
 else :
     #--------------
     # for batch
     #--------------
-    command_base = 'python scripts/filter.py  --filesDir root://eoscms/%(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob %(nFilesPerJob)d --batch --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s '
+    command_base = 'python scripts/filter.py  --filesDir %(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/FilterWgamgamFinal/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob %(nFilesPerJob)d --batch --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s '
+#command_base = 'python scripts/filter.py  --filesDir root://eoscms/%(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/%(output)s/%(job)s --outputFile tree.root --treeName %(treename)s --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob %(nFilesPerJob)d --batch --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s '
 
 
 if options.resubmit :
     command_base += ' --resubmit'
 
-check_commands_base = 'python ../../Util/scripts/check_dataset_completion.py --originalDS %(base)s/%(job)s --filteredDS /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/%(output)s/%(job)s --treeNameOrig %(treename)s --histNameFilt ggNtuplizer/filter --fileKeyOrig tree.root --fileKeyFilt tree.root'
+check_commands_base = 'python ../../Util/scripts/check_dataset_completion.py --originalDS %(base)s/%(job)s --filteredDS /afs/cern.ch/work/c/cranelli/public/WGamGam/FilterWgamgamFinal/%(output)s/%(job)s --treeNameOrig %(treename)s --histNameFilt ggNtuplizer/filter --fileKeyOrig tree.root --fileKeyFilt tree.root'
 
 #command_base = 'python scripts/filter.py  --filesDir %(base)s/%(job)s --fileKey tree.root --outputDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/%(output)s/%(job)s --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/%(module)s --moduleArgs "%(moduleArgs)s" --nFilesPerJob 5 --nproc %(nproc)d --confFileName %(tag)s_%(job)s.txt --exeName %(exe)s'
 
