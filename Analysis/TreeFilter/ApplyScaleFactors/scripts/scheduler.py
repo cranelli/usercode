@@ -11,9 +11,9 @@ options = p.parse_args()
 
 if not options.run and not options.check :
     options.run = True
-
-base = '/afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output'
-base_orig_dy = 'root://eoscms//eos/cms/store/group/phys_smp/ggNtuples/mc'
+base = '/afs/cern.ch/work/c/cranelli/public/WGamGam/ReFilterFinalNtuple'
+#base = '/afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output'
+#base_orig_dy = 'root://eoscms//eos/cms/store/group/phys_smp/ggNtuples/mc'
 base_orig = 'root://eoscms//eos/cms/store/group/phys_egamma/cmkuo/'
 
 
@@ -28,9 +28,9 @@ jobs_data = [
         #(base, base_orig, 'job_electron_2012d_Jan22rereco'),
 ]
 jobs_mc = [
-        #(base, base_orig, 'job_summer12_Wgg_FSR'),
-        #(base, base_orig, 'job_summer12_WAA_ISR'),
-        (base,  base_orig_dy, 'job_summer12_DYJetsToLL'),
+        (base, base_orig, 'job_summer12_Wgg_FSR'),
+        (base, base_orig, 'job_summer12_WAA_ISR'),
+        #(base,  base_orig_dy, 'job_summer12_DYJetsToLL'),
         #(base, base_orig, 'job_summer12_Wg'),
         #(base, base_orig, 'job_summer12_Zg'),
         #(base, base_orig, 'job_summer12_Zgg'),
@@ -95,8 +95,8 @@ else :
 if options.resubmit :
     command_base += ' --resubmit '
 
-input = 'LepLep_2014_12_23'
-output = 'LepLepNew_2015_02_02'
+input = 'LepGammaGammaFinalMuUnblindAll_2015_04_12'
+output = 'LepGammaGammaFinalMuUnblindAll_2015_04_12_ScaleFactors'
 
 module = 'Conf.py'
 nFilesPerJob = 1
