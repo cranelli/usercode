@@ -9,7 +9,7 @@ export LD_LIBRARY_PATH=$GCC_LIB:$BOOST_LIB:$PYTHON_DIR/lib:$LD_LIBRARY_PATH
 # add python to path
 export PATH=$PYTHONDIR/bin:$PATH
 # add python includes
-export PYTHONPATH=$ROOTSYS/lib:$PYTHONDIR/lib:$HOME/.python:$PYTHONPATH:$HOME/Programs/python:$HOME/Programs/python/numpy-1.8.1/build/lib.linux-x86_64-2.7/
+export PYTHONPATH=$PYTHONPATH:$ROOTSYS/lib:$PYTHONDIR/lib:$HOME/.python:$PYTHONPATH:$HOME/Programs/python:$HOME/Programs/python/numpy-1.8.1/build/lib.linux-x86_64-2.7/
 # add paths within this package
 export WorkArea=$PWD/Analysis
 export PYTHONPATH=$PYTHONPATH:${PWD}/Analysis/TreeFilter/Core/python:${PWD}/Analysis/Util/python

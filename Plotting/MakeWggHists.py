@@ -102,11 +102,11 @@ def main() :
     global samplesLLG
     global samplesPhOlap
 
-    baseDirWg  = '/afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepGammaNoPhID_2015_04_11'
-    baseDirWggSp = '/afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepGammaGammaNomUnblindAllNoEleVeto_2015_04_12'
-    baseDirWggMu = '/afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepGammaGammaFinalMuUnblindAllLoose_2015_06_10'
-    baseDirWggEl = '/afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepGammaGammaFinalElUnblindAllLoose_2015_06_10'
-    baseDirLLG = '/afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11'
+    baseDirWg  = '/afs/cern.ch/work/j/jkunkle/public/CMS/Wgamgam/Output/LepGammaNoPhID_2015_04_11'
+    baseDirWggSp = '/afs/cern.ch/work/j/jkunkle/public/CMS/Wgamgam/Output/LepGammaGammaNomUnblindAllNoEleVeto_2015_04_12'
+    baseDirWggMu = '/afs/cern.ch/work/j/jkunkle/public/CMS/Wgamgam/Output/LepGammaGammaFinalMuUnblindAllLoose_2015_06_10'
+    baseDirWggEl = '/afs/cern.ch/work/j/jkunkle/public/CMS/Wgamgam/Output/LepGammaGammaFinalElUnblindAllLoose_2015_06_10'
+    baseDirLLG = '/afs/cern.ch/work/j/jkunkle/public/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11'
 
     treename = 'ggNtuplizer/EventTree'
     filename = 'tree.root'
@@ -171,11 +171,11 @@ def main() :
         MakeJetFakeSystPlots() 
 
     print 'run samplesWg'
-    samplesWg.run_commands(nFilesPerJob=1)
+    #samplesWg.run_commands(nFilesPerJob=1)
     print 'run samplesWggMu'
-    samplesWggMu.run_commands(nFilesPerJob=1)
+    #samplesWggMu.run_commands(nFilesPerJob=1)
     print 'run samplesWggEl'
-    samplesWggEl.run_commands(nFilesPerJob=1)
+    #samplesWggEl.run_commands(nFilesPerJob=1)
     print 'run samplesLLG'
     samplesLLG.run_commands(nFilesPerJob=1)
     print '^_^ Finished ^_^'
