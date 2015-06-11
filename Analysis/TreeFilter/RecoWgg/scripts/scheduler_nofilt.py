@@ -130,7 +130,7 @@ module = 'ConfWgamgamReco.py'
 #output = 'LepGammaNoEleVetoNewVar_2014_05_02'
 
 #output = 'RecoOutput_2015_02_02'
-output = 'RecoOutput'
+output = 'RecoOutput/RecoOutput_2015_4_19'
 
 
 nFilesPerJob = 1

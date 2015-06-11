@@ -12,7 +12,7 @@ options = p.parse_args()
 if not options.run and not options.check :
     options.run = True
 
-base = '/afs/cern.ch/work/c/cranelli/public/WGamGam/'
+base = '/afs/cern.ch/work/c/cranelli/public/WGamGam'
 
 
 jobs_data = [
@@ -27,11 +27,12 @@ jobs_data = [
     # (base, 'job_electron_2012d_Jan22rereco'),
 ]
 jobs_mc = [
-
-    (base, 'job_summer12_Wgg_FSR'),
-    (base, 'job_summer12_WAA_ISR'),
     (base, 'job_LNuAA_LM0123_Reweight'),
     (base, 'job_LNuAA_LT012_Reweight'),
+    #(base, 'job_summer12_Wgg_FSR'),
+    #(base, 'job_summer12_WAA_ISR'),
+    #(base, 'job_LNuAA_LM0123_Reweight'),
+    #(base, 'job_LNuAA_LT012_Reweight'),
     #(base, 'job_summer12_DYJetsToLL'),
     #(base, 'job_summer12_Wg'),
     #(base, 'job_summer12_Zg'),
@@ -98,12 +99,13 @@ if options.resubmit :
     command_base += ' --resubmit '
 
 
-input = 'FilterWgamgamFinal/LepGammaGammaNoPhID_2015_3_31'
+input = 'FilterWgamgamFinal/AQGC_LepGammaGammaNoPhID_2015_5_1'
 #input = 'LepGammaGammaFullPhIDElPhScaleUp_2014_11_20'
 #output = 'LepGammaGammaTrigEleOlapUnblindLowPt_2015_01_02'
 #output = 'LepGammaGammaNomUnblindAll_2015_01_26'
 
-output = 'ReFilterFinalNtuple/LepGammaGammaFinalMu_2015_03_31'
+output = 'aQGCLepGammaGammaNomUnblindAll_2015_5_3'
+#output = 'ReFilterFinalNtuple/LepGammaGammaFinalMu_2015_4_19'
 
 #output = 'LepGammaGammaFullPhIDElPhScaleUpFinal_2014_11_20'
 
@@ -111,15 +113,15 @@ top_configs = [
     {   
      'module'      : 'ConfFilter.py', 
      'args'        : {'function' : 'make_final_el', 'blind_pt' : 'None'},
-     'input_name'  : 'LepGammaGammaNoPhID_2015_04_11',
-     'output_name' : 'LepGammaGammaFinalElUnblindAll_2015_04_15',
+     'input_name'  : 'FilterWgamgamFinal/AQGC_LepGammaGammaNoPhID_2015_5_1',
+     'output_name' : 'ReFilterFinalNtuple/LepGammaGammaFinalElUnblindAll_2015_5_3',
      'tag'         : 'elFinal'
     },
     {   
      'module'      : 'ConfFilter.py', 
      'args'        : {'function' : 'make_final_mu', 'blind_pt' : 'None'},
-     'input_name'  : 'LepGammaGammaNoPhID_2015_04_11',
-     'output_name' : 'LepGammaGammaFinalMuUnblindAll_2015_04_15',
+     'input_name'  : 'FilterWgamgamFinal/AQGC_LepGammaGammaNoPhID_2015_5_1',
+     'output_name' : 'ReFilterFinalNtuple/LepGammaGammaFinalMuUnblindAll_2015_5_3',
      'tag'         : 'muFinal'
     },
     #{   

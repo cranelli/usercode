@@ -11,22 +11,21 @@ options = p.parse_args()
 if not options.run and not options.check :
     options.run = True
 
-#base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2014_12_05'
 
-#base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2015_02_02'
-base = r'/afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput'
+
+base = r'/afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/RecoOutput_2015_5_1'
+#base = r'/afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/RecoOutput_2015_4_19'
 #base = r'/afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutputWithoutTrig'
-#base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutputDiMuon_2014_11_27'
 #base = r'/eos/cms/store/user/jkunkle/Wgamgam/RecoOutput_2014_10_30'
 jobs_data = [
-        (base, 'job_electron_2012a_Jan22rereco'),
-        (base, 'job_electron_2012b_Jan22rereco'),
-        (base, 'job_electron_2012c_Jan2012rereco'),
-        (base, 'job_electron_2012d_Jan22rereco'),
-        (base, 'job_muon_2012a_Jan22rereco'),
-        (base, 'job_muon_2012b_Jan22rereco'),
-        (base, 'job_muon_2012c_Jan22rereco'),
-        (base, 'job_muon_2012d_Jan22rereco'),
+        #(base, 'job_electron_2012a_Jan22rereco'),
+        #(base, 'job_electron_2012b_Jan22rereco'),
+        #(base, 'job_electron_2012c_Jan2012rereco'),
+        #(base, 'job_electron_2012d_Jan22rereco'),
+        #(base, 'job_muon_2012a_Jan22rereco'),
+        #(base, 'job_muon_2012b_Jan22rereco'),
+        #(base, 'job_muon_2012c_Jan22rereco'),
+        #(base, 'job_muon_2012d_Jan22rereco'),
 
         #(base, 'job_2muon_2012a_Jan22rereco'),
         #(base, 'job_2muon_2012b_Jan22rereco'),
@@ -66,10 +65,10 @@ jobs_data = [
 ]
 
 jobs_mc = [
-    #(base, 'job_LNuAA_LM0123_Reweight'),
-    #(base, 'job_LNuAA_LT012_Reweight'),
-    (base, 'job_summer12_WAA_ISR'),
-    (base, 'job_summer12_Wgg_FSR'),
+    (base, 'job_LNuAA_LM0123_Reweight'),
+    (base, 'job_LNuAA_LT012_Reweight'),
+    #(base, 'job_summer12_WAA_ISR'),
+    #(base, 'job_summer12_Wgg_FSR'),
         #(base, 'job_summer12_DYJetsToLL'),
         #(base, 'job_summer12_Zg'),
         #(base, 'job_summer12_Zgg'),
@@ -134,11 +133,18 @@ top_configs = [
         #'output_name' : 'LepGammaGammaNoPhIDNoElID_2015_3_31',
         #'tag'         : 'lgg',
        # },
+# { 
+#        'module'      : 'ConfObjFilter.py',
+#        'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\' }',
+#        'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\' }',
+#        'output_name' : 'LepGammaGammaNoPhID_2015_4_19',
+#        'tag'         : 'lgg',
+#        },
     { 
         'module'      : 'ConfObjFilter.py',
         'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\' }',
         'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\', \'isData\' : \'True\' }',
-        'output_name' : 'LepGammaGammaNoPhID_2015_3_31',
+        'output_name' : 'AQGC_LepGammaGammaNoPhID_2015_5_1',
         'tag'         : 'lgg',
         },
     #{ 

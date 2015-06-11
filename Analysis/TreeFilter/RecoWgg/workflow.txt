@@ -1,12 +1,10 @@
 python scripts/scheduler_nofilt.py
 
-
-
 #Command to run over my aQGC ggNtuple
 
-python scripts/filter.py  --files /afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LT012/LNuAA_LT012_Reweight_ggNtuple.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/job_LNuAA_LT012_Reweight --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamReco.py --enableKeepFilter --confFileName job_summer12_DYJetsToLL.txt --nsplit 1 --exeName RunAnalysisMC_job_LNuAA_LT012_Reweight --moduleArgs "{ 'sampleFile' : '/afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LT012/LNuAA_LT012_Reweight_ggNtuple.root'}"
+python scripts/filter.py  --files /afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LNuAA_QGC_LT_LO_PtG10/aQGC_Reweight_ggNtuple.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/RecoOutput_2015_6_9/job_LNuAA_LT_Reweight --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamReco_aQGC.py --enableKeepFilter --batch --confFileName job_LNuAA_LT_Reweight.txt --nsplit 10 --exeName RunAnalysisMC_job_LNuAA_LT_Reweight --moduleArgs "{ 'sampleFile' : '/afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LNuAA_QGC_LT_LO_PtG10/aQGC_Reweight_ggNtuple.root'}"
 
-python scripts/filter.py  --files /afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LM0123/LNuAA_LM0123_Reweight_ggNtuple.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/job_LNuAA_LM0123_Reweight --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamReco.py --enableKeepFilter --confFileName job_summer12_DYJetsToLL.txt --nsplit 1 --exeName RunAnalysisMC_job_LNuAA_LM0123_Reweight --moduleArgs "{ 'sampleFile' : '/afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LM0123/LNuAA_LM0123_Reweight_ggNtuple.root'}"
+python scripts/filter.py  --files /afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LM0123/LNuAA_LM0123_Reweight_ggNtuple.root --outputDir /afs/cern.ch/work/c/cranelli/public/WGamGam/RecoOutput/RecoOutput_2015_5_1/job_LNuAA_LM0123_Reweight --outputFile tree.root --treeName ggNtuplizer/EventTree --module scripts/ConfWgamgamReco_aQGC.py --enableKeepFilter --confFileName job_summer12_DYJetsToLL.txt --nsplit 1 --exeName RunAnalysisMC_job_LNuAA_LM0123_Reweight --moduleArgs "{ 'sampleFile' : '/afs/cern.ch/work/c/cranelli/public/WGamGam/aQGC_Reweighted_ggNtuples/LM0123/LNuAA_LM0123_Reweight_ggNtuple.root'}"
 
 #Command to run over SM ggNtuple (Stored on cmkuo EOS space.)
 

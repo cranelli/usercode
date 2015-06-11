@@ -95,8 +95,8 @@ else :
 if options.resubmit :
     command_base += ' --resubmit '
 
-input = 'LepGammaGammaFinalMuUnblindAll_2015_04_12'
-output = 'LepGammaGammaFinalMuUnblindAll_2015_04_12_ScaleFactors'
+input = 'LepGammaGammaFinalElandMuUnblindAll_2015_4_19'
+output = 'LepGammaGammaFinalElandMuUnblindAll_2015_4_19_ScaleFactors'
 
 module = 'Conf.py'
 nFilesPerJob = 1
