@@ -16,7 +16,6 @@ base = '/afs/cern.ch/work/c/cranelli/public/WGamGam'
 
 
 jobs_data = [
-
     # (base, 'job_muon_2012a_Jan22rereco'),
     # (base, 'job_muon_2012b_Jan22rereco'),
     # (base, 'job_muon_2012c_Jan22rereco'),
@@ -99,6 +98,7 @@ if options.resubmit :
     command_base += ' --resubmit '
 
 
+
 input = 'FilterWgamgamFinal/AQGC_LepGammaGammaNoPhID_2015_5_1'
 #input = 'LepGammaGammaFullPhIDElPhScaleUp_2014_11_20'
 #output = 'LepGammaGammaTrigEleOlapUnblindLowPt_2015_01_02'
@@ -108,8 +108,10 @@ output = 'aQGCLepGammaGammaNomUnblindAll_2015_5_3'
 #output = 'ReFilterFinalNtuple/LepGammaGammaFinalMu_2015_4_19'
 
 #output = 'LepGammaGammaFullPhIDElPhScaleUpFinal_2014_11_20'
+output = 'TEST'
 
 top_configs = [
+
     {   
      'module'      : 'ConfFilter.py', 
      'args'        : {'function' : 'make_final_el', 'blind_pt' : 'None'},
@@ -124,6 +126,7 @@ top_configs = [
      'output_name' : 'ReFilterFinalNtuple/LepGammaGammaFinalMuUnblindAll_2015_5_3',
      'tag'         : 'muFinal'
     },
+
     #{   
     # 'module'      : 'ConfFilter.py', 
     # 'args'        : {'function' : 'make_nominal_unblind_noEleVeto', 'blind_pt' : 'None'},
@@ -151,6 +154,20 @@ top_configs = [
     # 'input_name'  : 'LepGammaGammaNoPhID_2015_04_11',
     # 'output_name' : 'LepGammaGammaNoPhIDInvPixSeedSubl_2015_04_12',
     # 'tag'         : 'invSubl'
+    #},
+    {   
+     'module'      : 'ConfFilter.py', 
+     'args'        : {'function' : 'make_wgjj'},
+     'input_name'  : 'LepGammaNoPhID_2015_04_11',
+     'output_name' : 'LepGammaJJNoPhID_2015_05_05',
+     'tag'         : 'wgjj'
+    },
+    #{   
+    # 'module'      : 'ConfFilter.py', 
+    # 'args'        : {'function' : 'make_zgjj'},
+    # 'input_name'  : 'LepLepGammaNoPhID_2015_04_11',
+    # 'output_name' : 'LepLepGammaJJNoPhID_2015_05_05',
+    # 'tag'         : 'zgjj'
     #},
 ]
 

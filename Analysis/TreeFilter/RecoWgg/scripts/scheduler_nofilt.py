@@ -26,7 +26,7 @@ jobs = [
         #(base_data, 'job_muon_2012b_Jan22rereco', 100),
         #(base_data, 'job_muon_2012c_Jan22rereco', 200),
         #(base_data, 'job_muon_2012d_Jan22rereco', 200),
-        #(base_data, 'job_electron_2012a_Jan22rereco', 100),
+        (base_data, 'job_electron_2012a_Jan22rereco', 100),
         #(base_data, 'job_electron_2012b_Jan22rereco', 200),
         #(base_data, 'job_electron_2012c_Jan2012rereco', 400),
         #(base_data, 'job_electron_2012d_Jan22rereco', 500),
@@ -42,6 +42,7 @@ jobs = [
         #(base_mc, 'job_summer12_Wg', 50),
         #(base_mc, 'job_summer12_Zg', 200),
         #(base_me, 'job_summer12_Zgg', 5 ),
+
         (base_mc, 'job_summer12_Wgg_FSR', 20),
         (base_mc, 'job_summer12_WAA_ISR', 20),
 
@@ -131,7 +132,6 @@ module = 'ConfWgamgamReco.py'
 
 #output = 'RecoOutput_2015_02_02'
 output = 'RecoOutput/RecoOutput_2015_4_19'
-
 
 nFilesPerJob = 1
 nProc = 6

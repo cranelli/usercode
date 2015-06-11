@@ -1,6 +1,7 @@
 #CHANNELS=mu elzcr elfull elzcrinvpixsubl elzcrinvpixlead elfullinvpixsubl elfullinvpixlead
-CHANNELS=mu elfull elfullinvpixlead elfullinvpixsubl
+#CHANNELS=mu elfull elfullinvpixlead elfullinvpixsubl
 #CHANNELS=elzcr elfull elzcrinvpixsubl elzcrinvpixlead elfullinvpixsubl elfullinvpixlead
+CHANNELS=mu
 #CHANNELS=muZgg
 #CHANNELS=elfull 
 #CHANNELS=elzcr
@@ -19,18 +20,16 @@ CHANNELS=mu elfull elfullinvpixlead elfullinvpixsubl
 #CHANNELS=mu elzcr elfull elzcrinvpixsubl
 #CHANNELS=elzcrinvpixlead elzcrinvpixsubl elfullinvpixsubl elfullinvpixlead
 
-OUTPUTMAIN=~/Plots/WggPlots_2015_04_13
+OUTPUTMAIN=~/Plots/WggPlots_2015_06_05
 OUTPUTJET=$(OUTPUTMAIN)/JetFakeResultsSyst
 SYSTFILE=$(OUTPUTMAIN)/JetFakeTemplatePlots/systematics.pickle
 
-#JETFITVARS=chIsoCorr
-#JETFITVARS=sigmaIEIE chIsoCorr phoIsoCorr
-JETFITVARS=phoIsoCorr
-JETFFCORRINPUTS=nom veryloose loose tight None
-#JETFFCORRINPUTS=nom
+JETFITVARS=sigmaIEIE phoIsoCorr chIsoCorr
+#JETFFCORRINPUTS=nom veryloose loose tight None
+JETFFCORRINPUTS=veryloose
 PTBINS=15,25,40,70,1000000
 #PTBINS=15,1000000
-SINGLEOUTPUT=~/Plots/WggPlots_2015_03_06/
+SINGLEOUTPUT=~/Plots/WggPlots_2015_05_12/
 MODULE=Modules/JetFakeFit.py
 all : plots syst jet ele background evetosf
 	@echo "^_^ FINISHED ^_^"
@@ -38,16 +37,21 @@ jet :
 	for item in $(CHANNELS) ; do \
 	    for var in $(JETFITVARS) ; do \
 	        for ffinput in $(JETFFCORRINPUTS) ; do \
-	            python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --nom --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput --quiet ; \
+	            #python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --nom --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput --quiet ; \
 	            python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr533 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet;  \
-	            python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr855 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet; \
-	            python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr1077 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet;  \
-	            python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr1299 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet; \
-	            python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr151111 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet; \
-	            python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr201616 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet; \
+	            #python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr855 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet; \
+	            #python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr1077 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet;  \
+	            #python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr1299 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet; \
+	            #python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr151111 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet; \
+	            #python RunMatrixFit.py --samplesConf $(MODULE) --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --outputDir $(OUTPUTJET) --asymcorr201616 --channel $$item --syst_file $(SYSTFILE) --ptbins $(PTBINS) --fitvar $$var --ffcorr $$ffinput  --quiet; \
 		done \
 	    done \
 	done
+
+newjet :
+	python RunMatrixFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree --xsFile cross_sections/wgamgam.py --lumi 19400 --outputDir $(OUTPUTMAIN) --syst_file   $(SYSTFILE)
+
+
 
 ele :
 	python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepGammaNoPhID_2015_04_11/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir $(OUTPUTMAIN) --bw_cms_fine 
@@ -56,13 +60,6 @@ ele :
 	python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepGammaNoPhID_2015_04_11/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir $(OUTPUTMAIN) --bw_exp_coarse 
 	python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepGammaNoPhID_2015_04_11/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir $(OUTPUTMAIN) --ndkeys_cms_fine 
 	python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepGammaNoPhID_2015_04_11/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir $(OUTPUTMAIN) --ndkeys_cms_coarse
-
-	#python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/TAndPElFF_2015_01_01/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir ~/Plots/WggPlots_2014_12_23 --bw_cms_fine --useTAndP
-	#python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/TAndPElFF_2015_01_01/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir ~/Plots/WggPlots_2014_12_23 --bw_cms_coarse --useTAndP
-	#python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/TAndPElFF_2015_01_01/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir ~/Plots/WggPlots_2014_12_23 --bw_exp_fine --useTAndP
-	#python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/TAndPElFF_2015_01_01/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir ~/Plots/WggPlots_2014_12_23 --bw_exp_coarse --useTAndP
-	#python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/TAndPElFF_2015_01_01/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir ~/Plots/WggPlots_2014_12_23 --ndkeys_cms_fine --useTAndP
-	#python FitElectronFakes.py --baseDir /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/TAndPElFF_2015_01_01/ --treeName ggNtuplizer/EventTree --fileName tree.root --lumi 19400 --samplesConf Modules/ElectronFake.py --outputDir ~/Plots/WggPlots_2014_12_23 --ndkeys_cms_coarse --useTAndP
 
 tandp :
 	#python FitTagAndProbe.py  --muon --outputDir ~/Plots/WggPlots_2014_11_20
@@ -76,9 +73,10 @@ syst :
 	python CollectSystUncertanities.py --baseDir $(OUTPUTMAIN) --save
 
 plots :
-	python MakeWggHists.py --xsFile cross_sections/wgamgam.py --makeEvent --makeEleFake --makeJetFakeTemplate --makeLooseDiPhoton --makeLepGamma --makeLepLepGamma --lumi 19400 --outputDir $(OUTPUTMAIN)  --save
-	#python MakeWggHists.py --xsFile cross_sections/wgamgam.py --makeJetFakeTemplate --lumi 19400 --outputDir $(OUTPUTMAIN)  --save
-	#python MakeWggHists.py --xsFile cross_sections/wgamgam.py --makeLooseDiPhoton --lumi 19400 --outputDir $(OUTPUTMAIN)  --save
+	#python MakeWggHists.py --xsFile cross_sections/wgamgam.py --makeEvent --makeEleFake --makeJetFakeTemplate --makeJetFakeSyst --makeLepGamma --makeLepLepGamma --lumi 19400 --outputDir $(OUTPUTMAIN)  --save
+	#python MakeWggHists.py --xsFile cross_sections/wgamgam.py --makeEvent --makeEleFake --makeJetFakeTemplate --makeLepGamma --makeLepLepGamma --lumi 19400 --outputDir $(OUTPUTMAIN)  --save
+	#python MakeWggHists.py --xsFile cross_sections/wgamgam.py --makeJetFakeSyst --lumi 19400 --outputDir $(OUTPUTMAIN)  --save
+	python MakeWggHists.py --xsFile cross_sections/wgamgam.py --makeEvent --lumi 19400 --outputDir $(OUTPUTMAIN)  --save
 
 background :
 	#python MakeBackgroundEstimates.py --baseDir $(OUTPUTMAIN) --ptbins 15,25,40,70,1000000 --plotDir Plots
@@ -87,21 +85,21 @@ background :
 
 singlephjet : 
 	for var in $(JETFITVARS) ; do \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel elw --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel elwinvpixlead --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel elwzcrinvpixlead --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel elwzcr --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel mu --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel el --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel murealcr --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel elrealcr --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel mu_tp_eveto --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel mu_tp_eveto_loose --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel mu_tp_eveto_tight --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel mu_tp_medium --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel mu_tp_medium_loose --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel mu_tp_medium_tight --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel muw --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel muw_tp_medium --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
-	    #python RunSinglePhotonFit.py --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --nom --channel muw_tp_eveto --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel elw --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel elwinvpixlead --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel elwzcrinvpixlead --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel elwzcr --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel mu --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel el --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel murealcr --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel elrealcr --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel mu_tp_eveto --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel mu_tp_eveto_loose --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel mu_tp_eveto_tight --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel mu_tp_medium --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel mu_tp_medium_loose --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel mu_tp_medium_tight --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel muw --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel muw_tp_medium --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
+	    #python RunSinglePhotonFit.py --fitPath /afs/cern.ch/work/j/jkunkle/private/CMS/Wgamgam/Output/LepLepGammaNoPhID_2015_04_11/ --samplesConf Modules/JetFakeFit.py --fileName tree.root --treeName ggNtuplizer/EventTree   --xsFile cross_sections/wgamgam.py  --lumi 19400 --channel muw_tp_eveto --outputDir $(SINGLEOUTPUT) --fitvar $$var; \
 	done

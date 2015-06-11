@@ -126,6 +126,7 @@ jobs_mc = [
 #output_name = 'LepGamma_2013_11_04'
 
 top_configs = [ 
+<<<<<<< HEAD
         #{
         #'module'      : 'ConfNoElId.py',
         #'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\' }',
@@ -155,6 +156,49 @@ top_configs = [
                 #  'output_name' : 'DiLepton_2014_09_22',
                 #  'tag'         : 'llData',
 
+=======
+                #{ 
+                #  'module'      : 'ConfObjFilter.py',
+                #  'args_mc'     : '{ \'cut_nLep\' : \' > 0 \' }',
+                #  'args_data'   : '{ \'cut_nLep\' : \' > 0 \' }',
+                #  'output_name' : 'SingleLeptonLoose_2015_04_11',
+                #  'tag'         : 'singlLep',
+                #},
+                { 
+                  'module'      : 'ConfObjFilter.py',
+                  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\' }',
+                  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 1\', \'isData\' : \' == True\' }',
+                  'output_name' : 'LepGammaGammaNoOlap_2015_04_20',
+                  'tag'         : 'lgg',
+                },
+                #{ 
+                #  'module'      : 'ConfObjFilter.py',
+                #  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 0\' }',
+                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nPh\' : \'> 0\', \'isData\' : \' == True\' }',
+                #  'output_name' : 'LepGammaNoPhID_2015_04_11',
+                #  'tag'         : 'lg',
+                #},
+                #{ 
+                #  'module'      : 'ConfObjFilter.py',
+                #  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_nPh\' : \'> 0\' }',
+                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_nPh\' : \'> 0\', \'isData\' : \' == True\' }',
+                #  'output_name' : 'LepLepGammaNoPhID_2015_04_11',
+                #  'tag'         : 'llg',
+                #},
+                #{ 
+                #  'module'      : 'ConfObjFilter.py',
+                #  'args_mc'     : '{ \'cut_nLep\' : \' > 0 \', \'cut_nPh\' : \'> 1\' }',
+                #  'args_data'   : '{ \'cut_nLep\' : \' > 0 \', \'cut_nPh\' : \'> 1\', \'isData\' : \' == True\' }',
+                #  'output_name' : 'LepGammaGammaNoPhIDLooseLep_2015_04_20',
+                #  'tag'         : 'lgg',
+                #},
+                #{ 
+                #  'module'      : 'ConfObjFilter.py',
+                #  'args_mc'     : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_m_leplep\' : \' > 110 \'}',
+                #  'args_data'   : '{ \'cut_nLepTrigMatch\' : \' > 0 \', \'cut_nLep\' : \'> 1\', \'cut_m_leplep\' : \' > 110 \', \'isData\' : \' == True\' }',
+                #  'output_name' : 'LepLepLoose_2015_04_08',
+                #  'tag'         : 'll',
+>>>>>>> 6105a7257f00c2396c06cf65481ca0765ebbabc5
                 #},
 ]
 
